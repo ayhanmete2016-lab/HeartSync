@@ -7,7 +7,7 @@ Dosya:
 welcome_page.dart
 
 Versiyon:
-0.3.1
+0.3.2
 
 Görevi:
 Kullanıcıyı uygulamaya karşılar.
@@ -85,7 +85,7 @@ class WelcomePage extends StatelessWidget {
 
               const SizedBox(height: 70),
 
-              /// Hesap Oluştur
+              /// ❤️ Hesap Oluştur
               SizedBox(
                 width: double.infinity,
                 height: 55,
@@ -93,12 +93,9 @@ class WelcomePage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
 
-                    // Register ekranı hazır olana kadar
-                    // Login ekranına yönlendiriyoruz.
-
                     Navigator.pushNamed(
                       context,
-                      AppRouter.login,
+                      AppRouter.register,
                     );
 
                   },
@@ -112,7 +109,7 @@ class WelcomePage extends StatelessWidget {
 
               const SizedBox(height: 15),
 
-              /// Giriş Yap
+              /// 🔑 Giriş Yap
               SizedBox(
                 width: double.infinity,
                 height: 55,
@@ -138,7 +135,7 @@ class WelcomePage extends StatelessWidget {
 
               /// Alt Bilgi
               const Text(
-                "Version 0.3.1",
+                "Version 0.3.2",
                 style: TextStyle(
                   color: Colors.white24,
                   fontSize: 12,
