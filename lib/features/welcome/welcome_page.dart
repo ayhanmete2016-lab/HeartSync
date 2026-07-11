@@ -7,16 +7,25 @@ Dosya:
 welcome_page.dart
 
 Versiyon:
-0.3.0
+0.3.1
 
 Görevi:
-Kullanıcıyı giriş veya kayıt ekranına yönlendirir.
+Kullanıcıyı uygulamaya karşılar.
 
-İleride:
-• Gerçek logo
+Bu ekrandan;
+
+• Hesap Oluştur
+• Giriş Yap
+
+ekranlarına yönlendirme yapılır.
+
+İleride eklenecek:
+
+• Canlı logo
 • Arka plan animasyonu
-• Hafif parıltılar
+• Parlayan yıldızlar
 • Premium tanıtımı
+• Dil seçimi
 
 Ayhan & ChatGPT
 
@@ -24,6 +33,8 @@ Ayhan & ChatGPT
 */
 
 import 'package:flutter/material.dart';
+
+import '../../app/router.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -42,6 +53,7 @@ class WelcomePage extends StatelessWidget {
 
             children: [
 
+              /// ❤️ Logo
               const Text(
                 "❤️",
                 style: TextStyle(fontSize: 120),
@@ -49,6 +61,7 @@ class WelcomePage extends StatelessWidget {
 
               const SizedBox(height: 30),
 
+              /// Uygulama Adı
               const Text(
                 "HeartSync",
                 style: TextStyle(
@@ -60,6 +73,7 @@ class WelcomePage extends StatelessWidget {
 
               const SizedBox(height: 10),
 
+              /// Slogan
               const Text(
                 "Birlikte büyüyen hikâyeler başlar.",
                 textAlign: TextAlign.center,
@@ -71,12 +85,23 @@ class WelcomePage extends StatelessWidget {
 
               const SizedBox(height: 70),
 
+              /// Hesap Oluştur
               SizedBox(
                 width: double.infinity,
                 height: 55,
 
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                    // Register ekranı hazır olana kadar
+                    // Login ekranına yönlendiriyoruz.
+
+                    Navigator.pushNamed(
+                      context,
+                      AppRouter.login,
+                    );
+
+                  },
 
                   child: const Text(
                     "❤️ Hesap Oluştur",
@@ -87,17 +112,36 @@ class WelcomePage extends StatelessWidget {
 
               const SizedBox(height: 15),
 
+              /// Giriş Yap
               SizedBox(
                 width: double.infinity,
                 height: 55,
 
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                    Navigator.pushNamed(
+                      context,
+                      AppRouter.login,
+                    );
+
+                  },
 
                   child: const Text(
                     "🔑 Giriş Yap",
                     style: TextStyle(fontSize: 18),
                   ),
+                ),
+              ),
+
+              const SizedBox(height: 50),
+
+              /// Alt Bilgi
+              const Text(
+                "Version 0.3.1",
+                style: TextStyle(
+                  color: Colors.white24,
+                  fontSize: 12,
                 ),
               ),
 
