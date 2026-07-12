@@ -30,7 +30,8 @@ import '../features/auth/register/register_page.dart';
 import '../features/onboarding/onboarding_page.dart';
 import '../features/splash/splash_page.dart';
 import '../features/welcome/welcome_page.dart';
-
+import '../features/legal/privacy_page.dart';
+import '../features/legal/terms_page.dart';
 class AppRouter {
   AppRouter._();
 
@@ -48,6 +49,10 @@ class AppRouter {
 
   /// Register
   static const register = "/register";
+
+static const terms = "/terms";
+static const privacy = "/privacy";
+
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -75,6 +80,16 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const RegisterPage(),
         );
+
+case terms:
+  return MaterialPageRoute(
+    builder: (_) => const TermsPage(),
+  );
+
+case privacy:
+  return MaterialPageRoute(
+    builder: (_) => const PrivacyPage(),
+  );
 
       default:
         return MaterialPageRoute(

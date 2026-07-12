@@ -6,8 +6,16 @@ HeartSync
 Dosya:
 heart_button.dart
 
+Versiyon:
+0.3.1
+
 Görevi:
 Uygulamanın ortak butonu.
+
+Özellikler:
+• Disabled (Pasif) desteği
+• Firebase'e hazır
+• Ortak tasarım
 
 İleride;
 
@@ -15,8 +23,8 @@ Uygulamanın ortak butonu.
 • İkon
 • Gradient
 • Premium görünüm
-
-buraya eklenecek.
+• Haptic Feedback
+• Ripple Animation
 
 Ayhan & ChatGPT
 
@@ -27,7 +35,9 @@ import 'package:flutter/material.dart';
 
 class HeartButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+
+  /// null ise buton pasif olur.
+  final VoidCallback? onPressed;
 
   const HeartButton({
     super.key,
