@@ -7,7 +7,7 @@ Dosya:
 terms_page.dart
 
 Versiyon:
-0.3.2
+0.3.3
 
 Görevi:
 Kullanım Koşulları ekranı.
@@ -95,14 +95,12 @@ Detaylı sözleşme ilerleyen sürümlerde uygulama içerisinde ve resmi interne
               SizedBox(
                 width: double.infinity,
                 height: 55,
-
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context, true);
                   },
-
                   child: const Text(
-                    "Kabul Ediyorum",
+                    "✅ Kabul Ediyorum",
                   ),
                 ),
               ),
@@ -112,17 +110,16 @@ Detaylı sözleşme ilerleyen sürümlerde uygulama içerisinde ve resmi interne
               SizedBox(
                 width: double.infinity,
                 height: 55,
-
                 child: OutlinedButton(
                   onPressed: () {
                     Navigator.pop(context, false);
                   },
-
                   child: const Text(
-                    "Geri Dön",
+                    "❌ Reddediyorum",
                   ),
                 ),
               ),
+
             ],
           ),
         ),

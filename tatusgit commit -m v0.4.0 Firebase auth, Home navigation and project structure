@@ -1,0 +1,24 @@
+warning: in the working copy of 'macos/Flutter/GeneratedPluginRegistrant.swift', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'pubspec.lock', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'windows/flutter/generated_plugin_registrant.cc', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'windows/flutter/generated_plugins.cmake', LF will be replaced by CRLF the next time Git touches it
+ android/app/build.gradle.kts                       |  15 [32m+[m[31m-[m
+ .../kotlin/com/example/heartsync/MainActivity.kt   |   5 [31m-[m
+ android/settings.gradle.kts                        |   3 [32m+[m[31m-[m
+ lib/app/router.dart                                |  38 [32m++[m[31m-[m
+ lib/features/auth/login/login_page.dart            | 177 [32m+++++++[m[31m-------[m
+ lib/features/auth/register/register_page.dart      | 271 [32m+++++++++++++[m[31m--------[m
+ lib/features/home/home_controller.dart             |   0
+ lib/features/home/home_page.dart                   |   0
+ lib/features/home/home_service.dart                |   0
+ lib/features/legal/privacy_page.dart               |  21 [32m+[m[31m-[m
+ lib/features/legal/terms_page.dart                 |  11 [32m+[m[31m-[m
+ lib/features/pairing/pairing_controller.dart       |   0
+ lib/features/pairing/pairing_page.dart             |   0
+ lib/main.dart                                      |   9 [32m+[m[31m-[m
+ macos/Flutter/GeneratedPluginRegistrant.swift      |   8 [32m+[m
+ pubspec.lock                                       | 239 [32m+++++++++++++++++[m[31m-[m
+ pubspec.yaml                                       |  20 [32m+[m[31m-[m
+ windows/flutter/generated_plugin_registrant.cc     |   9 [32m+[m
+ windows/flutter/generated_plugins.cmake            |   3 [32m+[m
+ 19 files changed, 585 insertions(+), 244 deletions(-)

@@ -1,0 +1,5 @@
+package com.ayhanmete.heartsync
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity : FlutterActivity()

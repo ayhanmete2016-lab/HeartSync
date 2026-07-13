@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "989680616101",
+    "project_id": "heartsync-c4ef2",
+    "storage_bucket": "heartsync-c4ef2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989680616101:android:3a7b980dac7f2d8092834c",
+        "android_client_info": {
+          "package_name": "com.ayhanmete.heartsync"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1rwmN0_qJZjnGejtYSailPiqBfi4DU0E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

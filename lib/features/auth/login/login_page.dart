@@ -7,20 +7,16 @@ Dosya:
 login_page.dart
 
 Versiyon:
-0.2.2
+0.3.0
 
 Görevi:
-• Kullanıcı giriş ekranı
-• Email girişi
-• Şifre girişi
-• Giriş Yap butonu
-• Google ile giriş (hazırlık)
+• Firebase Authentication giriş ekranı
+• Email
+• Şifre
+• Firebase Login
+• Google Login (Hazırlık)
 • Şifremi Unuttum
 • Hesap Oluştur
-
-NOT:
-Bu sürümde sadece arayüz hazırlanmıştır.
-Firebase bağlantısı bir sonraki sürümde eklenecektir.
 
 Ayhan & ChatGPT
 
@@ -28,10 +24,14 @@ Ayhan & ChatGPT
 */
 
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../app/router.dart';
 import '../../../shared/widgets/heart_button.dart';
 import '../../../shared/widgets/heart_logo.dart';
 import '../../../shared/widgets/heart_text_field.dart';
+
+import '../services/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -41,16 +41,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
-  /// Email kutusu
-  final TextEditingController emailController =
-      TextEditingController();
-
-  /// Şifre kutusu
-  final TextEditingController passwordController =
-      TextEditingController();
-
-  /// Şifre görünürlüğü
   bool obscurePassword = true;
 
   @override
@@ -60,11 +53,70 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  Future<void> login() async {
+    if (emailController.text.trim().isEmpty ||
+        passwordController.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Lütfen e-posta ve şifre giriniz."),
+        ),
+      );
+      return;
+    }
+
+    try {
+      await AuthService.login(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Giriş başarılı ❤️"),
+        ),
+      );
+
+     Navigator.pushNamedAndRemoveUntil(
+  context,
+  AppRouter.home,
+  (route) => false,
+);
+    } on FirebaseAuthException catch (e) {
+      String message = "Bir hata oluştu.";
+
+      switch (e.code) {
+        case "user-not-found":
+          message = "Bu e-posta ile kayıtlı kullanıcı bulunamadı.";
+          break;
+
+        case "wrong-password":
+        case "invalid-credential":
+          message = "E-posta veya şifre hatalı.";
+          break;
+
+        case "invalid-email":
+          message = "Geçersiz e-posta adresi.";
+          break;
+
+        case "too-many-requests":
+          message = "Çok fazla deneme yapıldı. Lütfen daha sonra tekrar deneyin.";
+          break;
+      }
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+        ),
+      );
+    }
+  }
+
   @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-
+  Widget build(BuildContext context) {    return Scaffold(
       backgroundColor: Colors.black,
 
       appBar: AppBar(
@@ -73,27 +125,22 @@ class _LoginPageState extends State<LoginPage> {
       ),
 
       body: SafeArea(
-
         child: SingleChildScrollView(
-
           padding: const EdgeInsets.all(24),
 
           child: Column(
-
             crossAxisAlignment: CrossAxisAlignment.stretch,
 
             children: [
 
               const SizedBox(height: 20),
 
-              /// ❤️ Logo
               const Center(
                 child: HeartLogo(size: 110),
               ),
 
               const SizedBox(height: 25),
 
-              /// Başlık
               const Center(
                 child: Text(
                   "Tekrar Hoş Geldin",
@@ -119,7 +166,6 @@ class _LoginPageState extends State<LoginPage> {
 
               const SizedBox(height: 45),
 
-              /// Email
               HeartTextField(
                 controller: emailController,
                 hint: "E-posta",
@@ -127,126 +173,77 @@ class _LoginPageState extends State<LoginPage> {
 
               const SizedBox(height: 20),
 
-              /// Şifre
               TextField(
-
                 controller: passwordController,
-
                 obscureText: obscurePassword,
-
                 style: const TextStyle(
                   color: Colors.white,
                 ),
-
                 decoration: InputDecoration(
-
                   hintText: "Şifre",
 
                   suffixIcon: IconButton(
-
                     onPressed: () {
-
                       setState(() {
-
-                        obscurePassword =
-                            !obscurePassword;
-
+                        obscurePassword = !obscurePassword;
                       });
-
                     },
-
                     icon: Icon(
-
                       obscurePassword
                           ? Icons.visibility
                           : Icons.visibility_off,
-
                     ),
-
                   ),
-
                 ),
-
               ),
 
               const SizedBox(height: 35),
 
-              /// Giriş Yap
               HeartButton(
-
                 text: "❤️ Giriş Yap",
-
-                onPressed: () {
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-
-                    const SnackBar(
-
-                      content: Text(
-                        "Firebase bağlantısı sonraki sürümde eklenecek.",
-                      ),
-
-                    ),
-
-                  );
-
+                onPressed: () async {
+                  await login();
                 },
-
               ),
 
               const SizedBox(height: 18),
 
-              /// Google
               OutlinedButton(
-
                 onPressed: () {},
-
                 child: const Text(
                   "Google ile Devam Et",
                 ),
-
               ),
 
               const SizedBox(height: 30),
 
               Center(
-
                 child: TextButton(
-
-                  onPressed: () {},
-
+                  onPressed: () {
+                    // Şifremi unuttum
+                  },
                   child: const Text(
                     "Şifremi Unuttum",
                   ),
-
                 ),
-
               ),
 
               Center(
-
                 child: TextButton(
-
-                  onPressed: () {},
-
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRouter.register,
+                    );
+                  },
                   child: const Text(
                     "Hesabın yok mu? Hesap Oluştur",
                   ),
-
                 ),
-
-              ),
-
-            ],
-
+              ),            ],
           ),
-
         ),
-
       ),
-
     );
-
   }
-
 }

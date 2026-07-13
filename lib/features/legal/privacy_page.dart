@@ -7,7 +7,7 @@ Dosya:
 privacy_page.dart
 
 Versiyon:
-0.3.2
+0.3.3
 
 Görevi:
 Gizlilik Politikası ekranı.
@@ -43,11 +43,13 @@ class PrivacyPage extends StatelessWidget {
 
           child: Column(
             children: [
+
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
+
                       Text(
                         "HeartSync Gizlilik Politikası",
                         style: TextStyle(
@@ -61,7 +63,9 @@ class PrivacyPage extends StatelessWidget {
 
                       Text(
                         """
-HeartSync kullanıcı gizliliğine önem verir.
+HeartSync kullanıcı gizliliğine büyük önem verir.
+
+Bu uygulamayı kullanarak aşağıdaki Gizlilik Politikasını kabul etmiş olursunuz.
 
 • Kişisel bilgileriniz yalnızca hizmet sunmak amacıyla kullanılır.
 
@@ -69,9 +73,11 @@ HeartSync kullanıcı gizliliğine önem verir.
 
 • Hesabınızı istediğiniz zaman silebilirsiniz.
 
-• Uygulama, güvenlik ve performans amacıyla teknik veriler toplayabilir.
+• Uygulama güvenlik ve performans amacıyla teknik veriler toplayabilir.
 
 • Hiçbir internet tabanlı sistem %100 güvenlik garantisi veremez.
+
+• HeartSync kişisel verileri üçüncü kişilerle kullanıcının izni olmadan paylaşmaz.
 
 Detaylı Gizlilik Politikası ilerleyen sürümlerde uygulama içerisinde ve resmi internet sitesinde yayımlanacaktır.
 """,
@@ -95,7 +101,9 @@ Detaylı Gizlilik Politikası ilerleyen sürümlerde uygulama içerisinde ve res
                   onPressed: () {
                     Navigator.pop(context, true);
                   },
-                  child: const Text("Kabul Ediyorum"),
+                  child: const Text(
+                    "✅ Kabul Ediyorum",
+                  ),
                 ),
               ),
 
@@ -108,9 +116,12 @@ Detaylı Gizlilik Politikası ilerleyen sürümlerde uygulama içerisinde ve res
                   onPressed: () {
                     Navigator.pop(context, false);
                   },
-                  child: const Text("Geri Dön"),
+                  child: const Text(
+                    "❌ Reddediyorum",
+                  ),
                 ),
               ),
+
             ],
           ),
         ),

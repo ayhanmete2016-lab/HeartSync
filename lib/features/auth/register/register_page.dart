@@ -30,6 +30,13 @@ import '../../../app/router.dart';
 import '../../../shared/widgets/heart_button.dart';
 import '../../../shared/widgets/heart_logo.dart';
 import '../../../shared/widgets/heart_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../services/auth_service.dart';
+import '../../user/models/user_model.dart';
+import '../../user/services/user_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -60,6 +67,96 @@ class _RegisterPageState extends State<RegisterPage> {
     confirmPasswordController.dispose();
     super.dispose();
   }
+
+
+Future<void> register() async {
+
+  if (!acceptTerms) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Lütfen kullanım koşullarını kabul edin."),
+      ),
+    );
+    return;
+  }
+
+  if (passwordController.text != confirmPasswordController.text) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Şifreler eşleşmiyor."),
+      ),
+    );
+    return;
+  }
+
+  try {
+    final credential = await AuthService.register(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    );
+
+    final user = UserModel(
+      uid: credential.user!.uid,
+      fullName: nameController.text.trim(),
+      email: emailController.text.trim(),
+      premium: false,
+      premiumType: "",
+      partnerUid: "",
+      pairCode: "",
+      heartLevel: 100,
+      streak: 0,
+      language: "tr",
+      notifications: true,
+      isOnline: true,
+      createdAt: Timestamp.now(),
+      updatedAt: Timestamp.now(),
+    );
+
+    await UserService.createUser(user);
+
+if (!mounted) return;
+
+ScaffoldMessenger.of(context).showSnackBar(
+  const SnackBar(
+    content: Text("Kayıt başarılı ❤️"),
+  ),
+);
+
+Navigator.pushNamedAndRemoveUntil(
+  context,
+  AppRouter.login,
+  (route) => false,
+);
+  } on FirebaseAuthException catch (e) {
+
+    String message = "Bir hata oluştu.";
+
+    switch (e.code) {
+      case "email-already-in-use":
+        message = "Bu e-posta zaten kullanılıyor.";
+        break;
+
+      case "invalid-email":
+        message = "Geçersiz e-posta adresi.";
+        break;
+
+      case "weak-password":
+        message = "Şifre çok zayıf.";
+        break;
+    }
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+}
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -178,113 +275,85 @@ class _RegisterPageState extends State<RegisterPage> {
 
               const SizedBox(height: 24),
 
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+              Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
 
-                  Checkbox(
-                    value: acceptTerms,
-                    onChanged: null,
-                  ),
+    const Text(
+      "Devam etmek için aşağıdaki sözleşmeleri okuyup kabul etmeniz gerekir.",
+      style: TextStyle(
+        color: Colors.white70,
+      ),
+    ),
 
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+    const SizedBox(height: 20),
 
-                      children: [
+    CheckboxListTile(
+      value: termsAccepted,
+      activeColor: Colors.green,
+      controlAffinity: ListTileControlAffinity.leading,
+      title: const Text(
+        "Kullanım Koşullarını okudum ve kabul ediyorum.",
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 15,
+        ),
+      ),
+      onChanged: (_) async {
 
-                        const Text(
-                          "Devam ederek aşağıdaki belgeleri kabul etmiş olursunuz.",
-                          style: TextStyle(
-                            color: Colors.white70,
-                          ),
-                        ),
+        final result = await Navigator.pushNamed(
+          context,
+          AppRouter.terms,
+        );
 
-                        const SizedBox(height: 12),
+        if (result == true) {
+          setState(() {
+            termsAccepted = true;
+          });
+        }
 
-                        InkWell(
-                          onTap: () async {
+      },
+    ),
 
-                            final result =
-                                await Navigator.pushNamed(
-                              context,
-                              AppRouter.terms,
-                            );
+    CheckboxListTile(
+      value: privacyAccepted,
+      activeColor: Colors.green,
+      controlAffinity: ListTileControlAffinity.leading,
+      title: const Text(
+        "Gizlilik Politikasını okudum ve kabul ediyorum.",
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 15,
+        ),
+      ),
+      onChanged: (_) async {
 
-                            if (result == true) {
-                              setState(() {
-                                termsAccepted = true;
-                              });
-                            }
+        final result = await Navigator.pushNamed(
+          context,
+          AppRouter.privacy,
+        );
 
-                          },
+        if (result == true) {
+          setState(() {
+            privacyAccepted = true;
+          });
+        }
 
-                          child: Text(
-                            termsAccepted
-                                ? "✅ Kullanım Koşulları"
-                                : "📄 Kullanım Koşulları",
-                            style: const TextStyle(
-                              color: Colors.lightBlue,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        ),
+      },
+    ),
 
-                        const SizedBox(height: 10),
-
-                        InkWell(
-                          onTap: () async {
-
-                            final result =
-                                await Navigator.pushNamed(
-                              context,
-                              AppRouter.privacy,
-                            );
-
-                            if (result == true) {
-                              setState(() {
-                                privacyAccepted = true;
-                              });
-                            }
-
-                          },
-
-                          child: Text(
-                            privacyAccepted
-                                ? "✅ Gizlilik Politikası"
-                                : "🔒 Gizlilik Politikası",
-                            style: const TextStyle(
-                              color: Colors.lightBlue,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        ),
-
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-
+  ],
+),
               const SizedBox(height: 30),
 
-              HeartButton(
-                text: "❤️ Hesap Oluştur",
-
-                onPressed: acceptTerms
-                    ? () {
-
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              "Firebase bağlantısı sonraki sürümde eklenecek.",
-                            ),
-                          ),
-                        );
-
-                      }
-                    : null,
-              ),
+          HeartButton(
+  text: "❤️ Hesap Oluştur",
+  onPressed: acceptTerms
+      ? () async {
+          await register();
+        }
+      : null,
+),
 
               const SizedBox(height: 15),
 
