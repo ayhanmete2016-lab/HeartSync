@@ -1,0 +1,65 @@
+{
+  "@@locale": "tr",
+
+  "appName": "HeartSync",
+  "appTitle": "HeartSync ❤️",
+
+  "welcome": "Hoş Geldin ❤️",
+  "loading": "Yükleniyor...",
+
+  "connect": "❤️ Bağ Kur",
+  "connecting": "Bağlanıyor...",
+
+  "partnerHeartId": "Partner Heart ID",
+  "heartId": "Heart ID",
+  "noPartner": "Henüz bir partner bağlı değil.",
+
+  "waitingApproval": "Karşı tarafın onayı bekleniyor.",
+  "requestSent": "Bağlantı isteğin gönderildi.",
+  "requestSentWaiting": "❤️ Bağlantı isteği gönderildi. Karşı tarafın onayı bekleniyor.",
+
+  "newConnectionRequest": "❤️ Yeni Bağlantı İsteği",
+  "partnerConnected": "❤️ Partner başarıyla bağlandı.",
+  "accept": "Kabul Et",
+  "reject": "Reddet",
+  "requestRejected": "Bağlantı isteği reddedildi.",
+
+  "viewTree": "Ağacı Gör",
+  "memories": "Anılar",
+  "customizePartner": "Partnerini Kişiselleştir",
+  "premium": "Premium Deneyimi",
+
+  "enterHeartId": "Lütfen bir Heart ID girin.",
+
+  "addMemory": "Yeni Anı",
+  "addMemoryDescription": "Yeni bir anı oluştur.",
+  "memoryDetail": "Anı Detayı",
+  "memoryDetailDescription": "Bu anının ayrıntıları burada görüntülenir.",
+  "editMemory": "Anıyı Düzenle",
+  "editMemoryDescription": "Bu anıyı düzenleyebilirsiniz.",
+  "noMemories": "Henüz anı eklenmedi.",
+  "createMemory": "Anı Oluştur",
+
+  "noPartnerInfo": "Partnerin olmasa bile anı biriktirebilir, günlük tutabilir ve bu alanı kendin için anlamlı hale getirebilirsin.",
+  "futureMemoriesTitle": "🌱 Gelecekteki Anılarım",
+  "futureMemoriesInfo": "Partnerin olmasa bile bugünden itibaren anılarını, düşüncelerini, şiirlerini ve hislerini biriktirebilirsin.\n\nBir gün hayatına biri girdiğinde istersen onunla paylaşabileceksin.",
+
+  "heartIdNotFound": "Heart ID bulunamadı.",
+  "cannotPairWithSelf": "Kendinle eşleşemezsin.",
+  "pendingRequestExists": "Zaten bekleyen bağlantı isteğin var.",
+  "unknownError": "Bilinmeyen hata oluştu.",
+
+  "sendNotification": "Bildirim Gönder",
+  "leaveFeeling": "Partnerine bir his bırak.",
+  "sendSilently": "Sessiz Gönder",
+  "messageType": "Mesaj Türü",
+  "send": "Gönder",
+
+  "notificationTitle": "Bildirim",
+  "silentNotificationTitle": "Sessiz Mesaj",
+
+  "notificationSent": "Mesaj gönderildi.",
+
+  "silentMessageDefault": "Sessiz bir mesaj bırakıldı.",
+  "visibleMessageDefault": "Bir mesaj bırakıldı."
+}

@@ -7,13 +7,13 @@ Dosya:
 splash_page.dart
 
 Versiyon:
-0.2.1
+0.2.2
 
 Görevi:
 • Açılış ekranı
 • Kalp animasyonu
 • Yazı animasyonu
-• Otomatik Onboarding geçişi
+• Geliştirme modunda Login ekranına geçiş
 
 Ayhan & ChatGPT
 
@@ -35,20 +35,18 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-
   @override
   void initState() {
     super.initState();
 
-    // Splash ekranında 3 saniye bekle.
-    // Daha sonra Onboarding ekranına geç.
-    Timer(const Duration(seconds: 3), () {
-
+    Timer(const Duration(seconds: 2), () {
       if (!mounted) return;
 
+      // Geliştirme aşamasında her zaman Login ekranına git.
+      // Böylece farklı hesaplarla kolayca test yapılabilir.
       Navigator.pushReplacementNamed(
         context,
-        AppRouter.onboarding,
+        AppRouter.login,
       );
     });
   }
@@ -57,12 +55,10 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             /// ❤️ Kalp
             const Text(
               "❤️",
@@ -107,7 +103,7 @@ class _SplashPageState extends State<SplashPage> {
 
             /// Versiyon
             const Text(
-              "Version 0.1.0",
+              "Version 0.2.2",
               style: TextStyle(
                 color: Colors.white24,
                 fontSize: 12,

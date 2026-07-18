@@ -23,15 +23,13 @@ Ayhan & ChatGPT
 
 ══════════════════════════════════════════════════════════════
 */
-
 import 'package:flutter/material.dart';
-
 import '../../../app/router.dart';
+import '../../../core/utils/validators.dart';
 import '../../../shared/widgets/heart_button.dart';
 import '../../../shared/widgets/heart_logo.dart';
 import '../../../shared/widgets/heart_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../services/auth_service.dart';
 import '../../user/models/user_model.dart';
 import '../../user/services/user_service.dart';
@@ -71,6 +69,15 @@ class _RegisterPageState extends State<RegisterPage> {
 
 Future<void> register() async {
 
+  if (!isValidEmail(emailController.text)) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Lütfen geçerli bir e-posta adresi girin."),
+      ),
+    );
+    return;
+  }
+
   if (!acceptTerms) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -95,6 +102,9 @@ Future<void> register() async {
       password: passwordController.text.trim(),
     );
 
+    final heartId =
+        "HS${DateTime.now().millisecondsSinceEpoch.toString().substring(6)}";
+
     final user = UserModel(
       uid: credential.user!.uid,
       fullName: nameController.text.trim(),
@@ -102,7 +112,8 @@ Future<void> register() async {
       premium: false,
       premiumType: "",
       partnerUid: "",
-      pairCode: "",
+      pairId: "",
+      heartId: heartId,
       heartLevel: 100,
       streak: 0,
       language: "tr",
@@ -114,21 +125,20 @@ Future<void> register() async {
 
     await UserService.createUser(user);
 
-if (!mounted) return;
+    if (!mounted) return;
 
-ScaffoldMessenger.of(context).showSnackBar(
-  const SnackBar(
-    content: Text("Kayıt başarılı ❤️"),
-  ),
-);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Kayıt başarılı ❤️"),
+      ),
+    );
 
-Navigator.pushNamedAndRemoveUntil(
-  context,
-  AppRouter.login,
-  (route) => false,
-);
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      AppRouter.login,
+      (route) => false,
+    );
   } on FirebaseAuthException catch (e) {
-
     String message = "Bir hata oluştu.";
 
     switch (e.code) {
@@ -152,13 +162,18 @@ Navigator.pushNamedAndRemoveUntil(
         content: Text(message),
       ),
     );
+  } catch (e) {
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Beklenmeyen hata: $e"),
+      ),
+    );
   }
 }
 
-
-
-
-  @override
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
@@ -361,6 +376,18 @@ Navigator.pushNamedAndRemoveUntil(
                 onPressed: () {},
                 child: const Text("Google ile Devam Et"),
               ),
+
+const SizedBox(height: 10),
+
+const Text(
+  "Yakında Apple ile giriş desteği de eklenecektir.",
+  textAlign: TextAlign.center,
+  style: TextStyle(
+    color: Colors.white38,
+    fontSize: 12,
+  ),
+),
+
 
               const SizedBox(height: 25),
 

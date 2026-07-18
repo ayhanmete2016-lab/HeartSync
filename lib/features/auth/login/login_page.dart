@@ -27,6 +27,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../app/router.dart';
+import '../../../core/utils/validators.dart';
 import '../../../shared/widgets/heart_button.dart';
 import '../../../shared/widgets/heart_logo.dart';
 import '../../../shared/widgets/heart_text_field.dart';
@@ -54,11 +55,19 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> login() async {
-    if (emailController.text.trim().isEmpty ||
-        passwordController.text.trim().isEmpty) {
+    if (!isValidEmail(emailController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Lütfen e-posta ve şifre giriniz."),
+          content: Text("Lütfen geçerli bir e-posta adresi girin."),
+        ),
+      );
+      return;
+    }
+
+    if (passwordController.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Lütfen şifrenizi giriniz."),
         ),
       );
       return;

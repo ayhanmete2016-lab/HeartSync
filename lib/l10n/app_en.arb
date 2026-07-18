@@ -1,0 +1,65 @@
+{
+  "@@locale": "en",
+
+  "appName": "HeartSync",
+  "appTitle": "HeartSync ❤️",
+
+  "welcome": "Welcome ❤️",
+  "loading": "Loading...",
+
+  "connect": "❤️ Connect",
+  "connecting": "Connecting...",
+
+  "partnerHeartId": "Partner Heart ID",
+  "heartId": "Heart ID",
+  "noPartner": "No partner connected yet.",
+
+  "waitingApproval": "Waiting for partner approval.",
+  "requestSent": "Connection request sent.",
+  "requestSentWaiting": "❤️ Connection request sent. Waiting for approval.",
+
+  "newConnectionRequest": "❤️ New Connection Request",
+  "partnerConnected": "❤️ Partner successfully connected.",
+  "accept": "Accept",
+  "reject": "Reject",
+  "requestRejected": "Connection request rejected.",
+
+  "viewTree": "View Tree",
+  "memories": "Memories",
+  "customizePartner": "Customize Partner",
+  "premium": "Premium Experience",
+
+  "enterHeartId": "Please enter a Heart ID.",
+
+  "addMemory": "New Memory",
+  "addMemoryDescription": "Create a new memory.",
+  "memoryDetail": "Memory Details",
+  "memoryDetailDescription": "Details of this memory.",
+  "editMemory": "Edit Memory",
+  "editMemoryDescription": "You can edit this memory.",
+  "noMemories": "No memories yet.",
+  "createMemory": "Create Memory",
+
+  "noPartnerInfo": "Even without a partner, you can collect memories, keep a diary, and make this space meaningful for yourself.",
+  "futureMemoriesTitle": "🌱 Future Memories",
+  "futureMemoriesInfo": "Even if you don't have a partner yet, you can start collecting your memories, thoughts, poems, and feelings from today.\n\nOne day, if someone enters your life, you can choose to share them.",
+
+  "heartIdNotFound": "Heart ID not found.",
+  "cannotPairWithSelf": "You cannot pair with yourself.",
+  "pendingRequestExists": "You already have a pending connection request.",
+  "unknownError": "An unknown error occurred.",
+
+  "sendNotification": "Send Notification",
+  "leaveFeeling": "Leave a feeling for your partner.",
+  "sendSilently": "Send Silently",
+  "messageType": "Message Type",
+  "send": "Send",
+
+  "notificationTitle": "Notification",
+  "silentNotificationTitle": "Silent Message",
+
+  "notificationSent": "Message sent.",
+
+  "silentMessageDefault": "A silent message has been left.",
+  "visibleMessageDefault": "A message has been left."
+}

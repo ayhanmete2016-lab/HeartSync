@@ -7,16 +7,10 @@ Dosya:
 router.dart
 
 Versiyon:
-0.3.0
+0.3.1
 
 Görevi:
 Uygulamadaki tüm ekran geçişlerini yönetir.
-
-Yeni bir ekran eklendiğinde;
-
-1- Import edilir.
-2- Route adı tanımlanır.
-3- Switch içerisine eklenir.
 
 Ayhan & ChatGPT
 
@@ -30,65 +24,90 @@ import '../features/auth/register/register_page.dart';
 import '../features/home/pages/home_page.dart';
 import '../features/legal/privacy_page.dart';
 import '../features/legal/terms_page.dart';
+import '../features/memories/pages/memories_page.dart';
+import '../features/notifications/pages/notifications_page.dart';
+import '../features/notifications/pages/send_notification_page.dart';
 import '../features/onboarding/onboarding_page.dart';
+import '../features/premium/pages/premium_preview_page.dart';
+import '../features/relationship/pages/partner_profile_page.dart';
+import '../features/relationship_tree/pages/relationship_tree_page.dart';
 import '../features/splash/splash_page.dart';
 import '../features/welcome/welcome_page.dart';
 
 class AppRouter {
   AppRouter._();
 
-  /// Splash
   static const splash = "/";
-
-  /// Onboarding
   static const onboarding = "/onboarding";
-
-  /// Welcome
   static const welcome = "/welcome";
 
-  /// Login
   static const login = "/login";
-
-  /// Register
   static const register = "/register";
 
-  /// Home
   static const home = "/home";
 
-  /// Legal
+  static const relationshipTree = "/relationship-tree";
+
+  static const notifications = "/notifications";
+  static const sendNotification = "/send-notification";
+
+  static const memories = "/memories";
+
+  static const partnerProfile = "/partner-profile";
+
+  static const premiumPreview = "/premium-preview";
+
   static const terms = "/terms";
   static const privacy = "/privacy";
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splash:
-        return MaterialPageRoute(
-          builder: (_) => const SplashPage(),
-        );
+        return MaterialPageRoute(builder: (_) => const SplashPage());
 
       case onboarding:
-        return MaterialPageRoute(
-          builder: (_) => const OnboardingPage(),
-        );
+        return MaterialPageRoute(builder: (_) => const OnboardingPage());
 
       case welcome:
-        return MaterialPageRoute(
-          builder: (_) => const WelcomePage(),
-        );
+        return MaterialPageRoute(builder: (_) => const WelcomePage());
 
       case login:
-        return MaterialPageRoute(
-          builder: (_) => const LoginPage(),
-        );
+        return MaterialPageRoute(builder: (_) => const LoginPage());
 
       case register:
-        return MaterialPageRoute(
-          builder: (_) => const RegisterPage(),
-        );
+        return MaterialPageRoute(builder: (_) => const RegisterPage());
 
       case home:
+        return MaterialPageRoute(builder: (_) => const HomePage());
+
+      case relationshipTree:
         return MaterialPageRoute(
-          builder: (_) => const HomePage(),
+          builder: (_) => const RelationshipTreePage(),
+        );
+
+      case notifications:
+        return MaterialPageRoute(
+          builder: (_) => const NotificationsPage(),
+        );
+
+      case sendNotification:
+        return MaterialPageRoute(
+          builder: (_) => const SendNotificationPage(),
+        );
+
+      case memories:
+        return MaterialPageRoute(
+          builder: (_) => const MemoriesPage(),
+        );
+
+      case partnerProfile:
+        return MaterialPageRoute(
+          builder: (_) => const PartnerProfilePage(),
+        );
+
+      case premiumPreview:
+        return MaterialPageRoute(
+          builder: (_) => const PremiumPreviewPage(),
         );
 
       case terms:
@@ -100,8 +119,6 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const PrivacyPage(),
         );
-
-
 
       default:
         return MaterialPageRoute(

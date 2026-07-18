@@ -7,7 +7,7 @@ Dosya:
 user_model.dart
 
 Versiyon:
-0.4.0
+0.5.0
 
 Görevi:
 HeartSync kullanıcı modeli.
@@ -24,11 +24,17 @@ class UserModel {
   final String fullName;
   final String email;
 
+  /// Kullanıcının herkese verebileceği benzersiz HeartSync ID
+  final String pairId;
+
   final bool premium;
   final String premiumType;
 
+  /// Partnerin Firebase UID'si
   final String partnerUid;
-  final String pairCode;
+
+  /// Kullanıcının benzersiz Heart ID'si
+  final String heartId;
 
   final int heartLevel;
   final int streak;
@@ -45,10 +51,11 @@ class UserModel {
     required this.uid,
     required this.fullName,
     required this.email,
+    required this.pairId,
     required this.premium,
     required this.premiumType,
     required this.partnerUid,
-    required this.pairCode,
+    required this.heartId,
     required this.heartLevel,
     required this.streak,
     required this.language,
@@ -63,10 +70,11 @@ class UserModel {
       "uid": uid,
       "fullName": fullName,
       "email": email,
+      "pairId": pairId,
       "premium": premium,
       "premiumType": premiumType,
       "partnerUid": partnerUid,
-      "pairCode": pairCode,
+      "heartId": heartId,
       "heartLevel": heartLevel,
       "streak": streak,
       "language": language,
